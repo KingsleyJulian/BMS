@@ -1,0 +1,13 @@
+node_modules
+out
+release
+dist
+.DS_Store
+*.log
+.env
+.env.local
+
+# PocketBase runtime data — never commit user data
+pb_data/
+resources/pocketbase/pocketbase
+resources/pocketbase/pocketbase.exe

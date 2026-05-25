@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #app {
+    height: 100%;
+    /* Lock the document scroll so only <main> (overflow-auto) scrolls.
+       Without this, anything taller than the viewport (long forms, modals
+       with their own scroll regions) ends up driving body scroll on top of
+       main's, producing a "double scroll" feel that lets the user drift past
+       the usable area. */
+    overflow: hidden;
+  }
+
+  /* Print-friendly defaults — let the page expand to whatever the
+     certificate needs and strip the cream background so paper looks clean. */
+  @media print {
+    html,
+    body,
+    #app {
+      height: auto !important;
+      overflow: visible !important;
+      background: white !important;
+    }
+  }
+
+  body {
+    @apply bg-cream-100 text-ink-900 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-sans font-semibold;
+  }
+}
+
+@layer components {
+  /* Was uppercase/tracked smallcaps; now a plain muted label for readability. */
+  .smallcaps {
+    @apply text-[11px] font-medium text-ink-600;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-cream-200/80
+           hover:text-cream-50 hover:bg-maroon-700/40 transition-colors text-sm;
+  }
+  .nav-link.router-link-active {
+    @apply bg-maroon-700/60 text-gold-400;
+  }
+
+  .pill {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-semibold
+           uppercase tracking-wider;
+  }
+  .pill-senior  { @apply bg-cream-300 text-ink-800; }
+  .pill-4ps     { @apply bg-cream-300 text-ink-800; }
+  .pill-pwd     { @apply bg-cream-400/80 text-ink-900; }
+  .pill-pending { @apply bg-cream-300 text-ink-700; }
+
+  .card {
+    @apply bg-cream-50 border border-cream-300/60 rounded-2xl shadow-sm;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
+           bg-maroon-accent text-cream-50 font-medium hover:bg-maroon-700
+           transition-colors text-sm shadow-sm;
+  }
+
+  .input-search {
+    @apply w-full pl-10 pr-4 py-2.5 rounded-lg bg-cream-50 border border-cream-300
+           focus:outline-none focus:ring-2 focus:ring-maroon-accent/30 text-sm;
+  }
+
+  .select-base {
+    @apply px-4 py-2.5 rounded-lg bg-cream-50 border border-cream-300
+           focus:outline-none focus:ring-2 focus:ring-maroon-accent/30 text-sm
+           min-w-[160px];
+  }
+}

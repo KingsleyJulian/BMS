@@ -1,0 +1,70 @@
+{
+  "name": "bms",
+  "version": "0.1.0",
+  "description": "Barangay Management System — local-first Electron app with PocketBase + Supabase sync",
+  "main": "out/main/index.js",
+  "author": "BMS",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "vue-tsc --noEmit && electron-vite build",
+    "preview": "electron-vite preview",
+    "package": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder",
+    "fetch:pocketbase": "node scripts/fetch-pocketbase.mjs",
+    "setup:supabase": "node scripts/setup-supabase.mjs",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "electron-store": "^10.0.0",
+    "node-machine-id": "^1.1.12",
+    "pocketbase": "^0.21.5",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "@types/qrcode": "^1.5.6",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/tsconfig": "^0.5.1",
+    "autoprefixer": "^10.4.20",
+    "electron": "^32.1.2",
+    "electron-builder": "^25.0.5",
+    "electron-vite": "^2.3.0",
+    "pinia": "^2.2.4",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vue": "^3.5.10",
+    "vue-router": "^4.4.5",
+    "vue-tsc": "^2.1.6"
+  },
+  "build": {
+    "appId": "com.bms.barangay",
+    "productName": "BMS",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "resources/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/pocketbase",
+        "to": "pocketbase"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
